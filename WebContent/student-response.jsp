@@ -26,14 +26,17 @@
 	<!--  display list of "favoriteClass" -->
 	
 	<ul>
-	
+			<!-- wrap the for loop output in an if statement to prevent NullPointerException if nothing checked -->
 		<%
 		
 			String[] favoriteClasses = request.getParameterValues("favoriteClass");
 		
-			for (String classSelected : favoriteClasses) {
-				out.println("<li>" + classSelected);
-			}
+			if (favoriteClasses != null){
+				
+				for (String classSelected : favoriteClasses) {
+					out.println("<li>" + classSelected + "</li>");
+				}
+			}	
 		
 		%>
 	
