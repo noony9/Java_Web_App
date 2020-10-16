@@ -111,6 +111,87 @@ Message Formatting (I18N): handling internationalization and formatting.
 Functions: handling string manipulations, getting sizes of collections.
 SQL: for accessing a database.  These in general are considered BAD practice.  Good for prototyping but not for RW production.
 
+TOPIC______________ Servlets
+
+Servlets and JSP comparison: Servlets released in 1997.  JSP released in 1999
+
+JSPs: HTML file with .jsp extension; Contains static HTML; JSP to generate HTML; Has built-in JSP objects
+
+Servlets: Java class file; Generate all HTML; More steps to access web objects
+
+Which one to use?  Can use either one for building Java web apps.  Build entire sites using either.
+
+Best practice?  Integrate them both together!  
+
+Servlet does the business logic and JSP handles the presentation view.  This is a very popular design pattern called
+Model-View-Controller (MVC) Design Pattern.  This design pattern is used by JSF, Spring, Struts!!!!!! They make use of
+JSPs and Servlets at the lower level.
+
+GET and POST comparison:
+
+<form action="FooServlet" method="GET"
+<form action="FooServlet" method="POST"
+
+the doGet and doPost methods in the servlet class have the same parameters and read form data the same way:  
+out.println(request.getParameter("firstName));
+
+Reading Configuration Parameters: 
+
+within the servlet's overridden doGet() method:
+...
+ServletContext context = getServletContext(); Helper class to read/parse web.xml
+
+String maxCart = context.getInitParameter("max-shopping-cart-size"); *note: method always returns a string, so you must
+do the conversion yourself for other data types.  Also, if the param name is not found, it will return a null and not
+throw an exception!
+
+out.println("Max cart: " + maxCart);
+
+"max-shopping-cart-size" was defined in the web.xml as a context parameter:
+
+<web-app>
+	<context-param>
+		<param-name>max-shopping-cart-size</param-name>
+		<param-value>99</param-value>
+	</context-param>
+
+TOPIC______________ MVC concept
+
+Big Picture:
+
+Web browser sends request to Controller (Servlet)
+Controller can get additional info needed from the Model (if needed)
+Controller sends info over to the View (JSP)
+JSP render an HTML view and send back to Web Browser
+
+Benefits of MVC: 
+
+Minimizes HTML code in Servlet (no more out.println's in Servlet)
+Minimizes Java business logic in JSPs (no more large scriptlets in JSP page)
+
+How does Servlet call JSP:
+
+Servlet can call a JSP...
+
+Step 1: get request dispatcher
+RequestDispatcher dispatcher = request.getRequestDispather("/view_students.jsp");
+
+Step 2: forward to the JSP
+dispatcher.forward(request, response);
+
+How does Servlet send data to JSP:
+
+Servlet can add data to request object...
+
+// step 0: add data
+String[] students = {"Mark", "Jim", "Jane"};
+request.setAttribute("student_list", students);
+
+// step 1: get request dispatcher
+RequestDispatcher dispatcher = request.getRequestDispatcher("/view_students.jsp");
+
+// step 2: forward to the JSP
+dispatcher.forward(request, response);
 
  -->
 
