@@ -4,19 +4,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Java Web App!</title>
+<title>Registration Page</title>
 </head>
-<body>
 
+<!-- Reset user cookies -->
+
+<%
+for (Cookie cookie : request.getCookies()) {
+    cookie.setValue("");
+    cookie.setMaxAge(0);
+    cookie.setPath("/");
+
+    response.addCookie(cookie);
+}
+%>
+
+<body>
 <jsp:include page="my-header.html" />
 
-Some content ... <br/><br/>
-Some content ... <br/><br/>
-Some content ... <br/><br/>
+<jsp:include page="student-form.html" />
 
-The time on the server is <%= new java.util.Date() %>
-
-<jsp:include page="my-footer.jsp" />	
-	
+<jsp:include page="my-footer.jsp" />
 </body>
 </html>

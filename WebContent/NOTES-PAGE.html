@@ -1,0 +1,118 @@
+<html>
+<body>
+
+<!-- 
+
+TOPIC______________ Difference between Servlet and JSP:  
+
+A servlet is a Java class which is used to extend the capabilities of servers that host applications accessed 
+by means of a request-response model. Servlets are mainly used to extend the applications hosted by webs servers, 
+however, they can respond to other types of requests too. For such applications, HTTP-specific servlet classes are 
+defined by Java Servlet technology.  
+
+A JSP is a text document which contains two types of text: static data and dynamic data. The static data can be 
+expressed in any text-based format (like HTML, XML, SVG and WML), and the dynamic content can be expressed by JSP 
+elements.
+
+TOPIC______________ Session Object
+
+By default, JSPs have session tracking enabled and a new HttpSession object is instantiated for each new client automatically. 
+Disabling session tracking requires explicitly turning it off by setting the page directive session attribute to false as 
+follows:
+
+(angle bracket, percent, plus at sign) page session="false" %>
+
+The JSP engine exposes the HttpSession object to the JSP author through the implicit session object. Since session object is 
+already provided to the JSP programmer, the programmer can immediately begin storing and retrieving data from the object without 
+any initialization or getSession().
+
+Just thought it may be useful to somebody that keeps wondering where the session object comes from.
+
+TOPIC______________ What is a pageContext Object in JSP:
+
+The pageContext object is an instance of a javax.servlet.jsp.PageContext object. The pageContext object is used to 
+represent the entire JSP page.
+
+This object is intended as a means to access information about the page while avoiding most of the implementation details.
+
+This object stores references to the request and response objects for each request. The application, config, session, and 
+out objects are derived by accessing attributes of this object.
+
+The pageContext object also contains information about the directives issued to the JSP page, including the buffering 
+information, the errorPageURL, and page scope.
+
+The PageContext class defines several fields, including PAGE_SCOPE, REQUEST_SCOPE, SESSION_SCOPE, and APPLICATION_SCOPE, 
+which identify the four scopes. It also supports more than 40 methods, about half of which are inherited from the 
+javax.servlet.jsp.JspContext class.
+
+One of the important methods is removeAttribute. This method accepts either one or two arguments. For example, 
+pageContext.removeAttribute ("attrName") removes the attribute from all scopes, while the following code only removes it from 
+the page scope
+
+pageContext.removeAttribute("attrName", PAGE_SCOPE);
+
+TOPIC______________ Cookies
+
+Functionality that is built into the browser.  Text data exchanged between web browser and server.
+
+Keeps track of user preferences.  Allows you to personalize a web site for a user.  You can show them their preferences at a 
+later time.  Ex. Expedia creates a cookie and stores it on the browser, user comes back to the site and the site has populated
+the user's previous data entered.
+
+Cookie - Contents:  
+Name / value pair:  name myApp.favoriteProgrammingLanguage, value Java
+
+Max is about 20 cookies per site, per path, but that is more than enough for most applications.
+
+Cookies are passed:  browser will only send cookies that match the server's domain name!  browser won't send over cookies
+that are not a match (helps with security).  
+
+Browser, preferences, privacy, search cookies stored on your computer/ set in the browser
+
+Cookies have an expiration time.
+
+Cookie API Package:  
+Cookie class defined in package: javax.servlet.http
+Package imported for free in all JSP pages.
+
+Cookie API Constructor:
+Cookie(String name, String value) constructs a cookie with the specified name/value
+
+Sending Cookies to Browser:
+Create cookie, set life span.. total number of seconds, send cookie to browser
+
+Retrieving cookies from Browser:
+
+TOPIC______________ JSP Tags
+
+Scenario:  Boss says we want to include a weather report in our JSP pages.
+
+Option 1: use Scriptlets (bad practice, a lot of java code in JSP pages, mixing business code with presentation code,
+also not reusable and maintainable)
+
+// connect to remote weather service
+// submit our weather request
+// receive weather results
+// parse the data: xml or json???
+// display output in JSP page
+
+Option 2: use JSP Custom Tags
+
+JSP Custom Tags:
+More heavy business logic into supporting classes
+Insert JSP custom tag to use supporting class: example, drop this into JSP page: <demo:weatherReport city="Philidelphia"/>
+The heavy lifting is in the back-end Java class.
+
+JSP Standard Tag Library (JSTL):
+Oracle created a Specification for standard tags that you can use on any projects.
+Core tags: for handling variables, looping and conditionals.
+XML tags: parsing and setting XML data.
+Message Formatting (I18N): handling internationalization and formatting.
+Functions: handling string manipulations, getting sizes of collections.
+SQL: for accessing a database.  These in general are considered BAD practice.  Good for prototyping but not for RW production.
+
+
+ -->
+
+</body>
+</html>
