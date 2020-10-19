@@ -3,6 +3,7 @@ package com.noony9_servlet_demo;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class HelloWorldServlet
  */
 @WebServlet("/HelloWorldServlet")
-public class HelloWorldServlet extends HttpServlet {
+public class MVC_DemoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloWorldServlet() {
+    public MVC_DemoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,19 +30,16 @@ public class HelloWorldServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// step 1: set the content type
-		response.setContentType("text/html");
+		// step 0: add data
+		String[] students = {"Susan", "Arnie", "Jerry", "Jane"};
+		request.setAttribute("student_list", students);
 		
-		// step 2: get the printWriter
-		PrintWriter out = response.getWriter();
+		// step 1: get request dispatcher
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/view_students.jsp");
 		
-		// step 3: generate HTML content
-		out.println("<html><body>");
-		out.println("<h2>Hello World</h2>");
-		out.println("<hr>");
-		out.println("Time on the server is: " + new java.util.Date());
-		
-		out.println("</body></html>");
+		// step 2: forward the request to JSP
+		dispatcher.forward(request,  response);
+			
 	}
 
 	/**

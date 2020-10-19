@@ -10,7 +10,7 @@
 
 <body>
 
-<!-- read the name and favorite programming language cookies -->
+	<!-- read the name and favorite programming language cookies -->
 	
 	<%
 		
@@ -69,6 +69,10 @@
 	
 	</form>
 
-<jsp:include page="my-footer.jsp" />
+	<jsp:include page="my-footer.jsp" />
+
+	<hr>
+	<a href="MVCServlet">View other Students in your class with MVC</a>
+	
 </body>
 </html>
